@@ -167,6 +167,11 @@ func main() {
 		port = "8080"
 	}
 
+	// register consul health check endpoint
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "OK")
+	})
+
 	// serve the handler
 	http.HandleFunc("/", handler)
 	log.Println("Serving on port " + port)
